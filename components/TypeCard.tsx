@@ -15,7 +15,7 @@ const TypeCard:FC<TypeCardProps> = ({className, type}) => {
     <li className={`col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200 ${className ? `${className}` : ""}`}>
       <div className='flex-1 flex flex-col p-8'>
         <div className="relative block overflow-hidden w-40 h-40 flex-shrink-0 mx-auto rounded-full">
-          <BlurhashCanvas 
+          <BlurhashCanvas hash=''
           {...type.blurhash}
           punch={1}
           style={{
