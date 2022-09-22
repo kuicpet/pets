@@ -1,5 +1,7 @@
 import {FC} from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import {BlurhashCanvas} from 'react-blurhash'
 import { AnimalType } from '../shared/interfaces/petfinder.interface'
 import {ANIMAL_TYPES} from '../enums'
 
@@ -12,23 +14,29 @@ const TypeCard:FC<TypeCardProps> = ({className, type}) => {
   return (
     <li className={`col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200 ${className ? `${className}` : ""}`}>
       <div className='flex-1 flex flex-col p-8'>
-        <div 
-          className='w-40 h-40 flex-shrink-0 mx-auto rounded-full bg-cover bg-no-repeat'
+        <div className="relative block overflow-hidden w-40 h-40 flex-shrink-0 mx-auto rounded-full">
+          <BlurhashCanvas 
+          {...type.blurhash}
+          punch={1}
           style={{
-            backgroundImage: `url(${ANIMAL_TYPES[type.name].image.url})`,
-            backgroundPosition: "center",
-            ...ANIMAL_TYPES[type.name].image.styles,
-          }}
-          role='img' 
-          aria-label={`Photo of ${type.name} by ${ANIMAL_TYPES[type.name].photographer.name}`}>
-          <h3 className='mt-6 text-gray-900 text-m font-medium'>{type.name}</h3>
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }} />
+           <Image {...type.img} alt={type.name} layout="fill" objectFit="cover" />
         </div>
+          <h3 className='mt-6 text-gray-900 text-m font-medium'>{type.name}</h3>
+        
         <div>
           <div className='-mt-px flex divide-x divide-gray-200'>
             <div className='w-0 flex-1 flex'>
               <Link href={{pathname: '/types/[type]', query: {type: type.id}}}>
-                <a>
-                  <span>Browse Listings</span>
+                <a className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                  <span className='text-black'>Browse Listings</span>
                 </a>
               </Link>
             </div>

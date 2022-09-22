@@ -1,3 +1,15 @@
+type IGetBlurhashReturn = {
+    hash: string;
+} & Record<"width" | "height", number>
+
+type IloadImageReturn = {
+    src: string
+    height: number
+    width: number
+    type?: string
+    objectPosition?: string
+}
+
 export interface AnimalAttributes {
     spayed_neutered: boolean;
     house_trained: boolean;
@@ -122,6 +134,8 @@ export interface AnimalTypeBreed {
 
 export interface AnimalType {
     id?: string;
+    blurhash?: IGetBlurhashReturn;
+    img?: IloadImageReturn;
     name: string
     coats: string[]
     colors: string[]
